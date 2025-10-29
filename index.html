@@ -68,6 +68,7 @@
       - Master/Slave Arch: Organize -> Diagram (HTML/CSS/Tailwind) -> Justification: Visualizes structure without SVG.
       - Cost Per Locker Reduction: Compare -> Bar Chart (Chart.js) -> Justification: Clear comparison of prototype vs mass.
       - Payback Period: Inform/Change -> Big Number + Line Chart (Chart.js) -> Justification: Shows ROI speed visually.
+      - **NEW: Peak Payback (400% Usage):** Inform/Change -> Big Number + Line Chart (Chart.js) -> Justification: Shows extreme ROI speed.
       - Profit Margin: Compare -> Donut Chart (Chart.js) -> Justification: Shows cost vs profit composition.
       - OPEX Breakdown: Compare -> Stacked Bar Chart (Chart.js) -> Justification: Shows Preventive vs Corrective costs.
       - Final ROI/OPEX vs Revenue: Inform -> Big Numbers -> Justification: Strong concluding stats.
@@ -147,7 +148,7 @@
         </section>
 
         <section id="revenue" class="mb-12 card">
-            <h2 class="text-2xl font-semibold mb-6 text-neutral text-center">Rapid Payback Scenario</h2>
+            <h2 class="text-2xl font-semibold mb-6 text-neutral text-center">Scenario 1: Conservative Payback (2 Uses/Day)</h2>
             <p class="mb-8 text-lg text-center">Using a conservative estimate of just two uses per locker per day in a high-traffic area, the system demonstrates exceptional profitability.</p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                 <div class="bg-accent1 text-white p-6 rounded-lg">
@@ -173,6 +174,36 @@
                  </div>
              </div>
         </section>
+
+        <!-- NEW PEAK PERFORMANCE SECTION -->
+        <section id="peak-revenue" class="mb-12 card border-4 border-secondary">
+            <h2 class="text-2xl font-semibold mb-6 text-neutral text-center">Scenario 2: Peak Performance Payback (8 Uses/Day - 400% Usage)</h2>
+            <p class="mb-8 text-lg text-center font-bold text-primary">In high-density locations, the system can achieve 400% of the conservative usage rate, driving exponential ROI. This scenario represents 8 uses per locker per day.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="bg-primary text-white p-6 rounded-lg">
+                    <p class="text-lg mb-1">Peak Daily Usage</p>
+                    <p class="highlight-stat">8</p>
+                    <p class="text-sm">Uses / Locker / Day</p>
+                </div>
+                 <div class="bg-secondary text-neutral p-6 rounded-lg">
+                    <p class="text-lg mb-1">Peak Daily Revenue</p>
+                    <p class="highlight-stat">₱8,000</p>
+                    <p class="text-sm">(50 Lockers x 8 Uses x ₱20)</p>
+                </div>
+                <div class="bg-accent1 text-white p-6 rounded-lg">
+                    <p class="text-lg mb-1">Payback Period</p>
+                    <p class="highlight-stat">9.75</p>
+                    <p class="text-sm">Days to Recoup Investment</p>
+                </div>
+            </div>
+             <div class="mt-8">
+                 <p class="text-lg text-center font-semibold mb-4 text-neutral">Investment vs. Peak Cumulative Revenue (First 20 Days)</p>
+                 <div class="chart-container h-[300px] md:h-[400px]">
+                     <canvas id="peakPaybackChart"></canvas>
+                 </div>
+             </div>
+        </section>
+        <!-- END NEW SECTION -->
 
         <section id="profit" class="mb-12 card">
             <h2 class="text-2xl font-semibold mb-6 text-neutral text-center">High Margins & Guaranteed Buyer ROI</h2>
@@ -226,9 +257,9 @@
         <section id="conclusion" class="card bg-neutral-dark text-white text-center">
             <h2 class="text-3xl font-bold mb-6">The Kasko Lock Investment Case</h2>
             <ul class="list-none space-y-4 text-lg md:text-xl mb-8 inline-block text-left">
-                <li class="flex items-start"><span class="text-accent1 mr-3 text-2xl font-bold">✓</span><span>**Fixed Cost Efficiency:** Master-Slave architecture minimizes scaling costs.</span></li>
-                <li class="flex items-start"><span class="text-accent1 mr-3 text-2xl font-bold">✓</span><span>**Ultra-Rapid ROI:** Payback achieved in 39-59 days.</span></li>
-                <li class="flex items-start"><span class="text-accent1 mr-3 text-2xl font-bold">✓</span><span>**Sustainable Profit:** Low 5-year maintenance costs ensure high margins.</span></li>
+                <li class="flex items-start"><span class="text-accent1 mr-3 text-2xl font-bold">✓</span></span><span>**Fixed Cost Efficiency:** Master-Slave architecture minimizes scaling costs.</span></li>
+                <li class="flex items-start"><span class="text-accent1 mr-3 text-2xl font-bold">✓</span></span><span>**Ultra-Rapid ROI:** Payback achieved in 39 days (conservative) or **under 10 days (peak)**.</span></li>
+                <li class="flex items-start"><span class="text-accent1 mr-3 text-2xl font-bold">✓</span></span><span>**Sustainable Profit:** Low 5-year maintenance costs ensure high margins.</span></li>
             </ul>
             <p class="text-2xl font-semibold text-secondary">Call to Action: Fund the first production run of 10 clusters to capture market share immediately.</p>
         </section>
@@ -279,6 +310,8 @@
             accent2: '#118AB2', // Pacific Blue
             neutral: '#073B4C' // Midnight Blue
         };
+        
+        const totalCost = 78000;
 
         // Cost Per Locker Chart
         const cplCtx = document.getElementById('costPerLockerChart').getContext('2d');
@@ -311,13 +344,12 @@
             }
         });
 
-        // Payback Chart
+        // Payback Chart (Conservative 2 Uses/Day)
         const paybackCtx = document.getElementById('paybackChart').getContext('2d');
         const paybackDays = 60;
-        const totalCost = 78000;
-        const dailyRevenue = 2000;
+        const dailyRevenueConservative = 2000;
         const paybackLabels = Array.from({length: paybackDays + 1}, (_, i) => `Day ${i}`);
-        const cumulativeRevenue = Array.from({length: paybackDays + 1}, (_, i) => i * dailyRevenue);
+        const cumulativeRevenueConservative = Array.from({length: paybackDays + 1}, (_, i) => i * dailyRevenueConservative);
         const costLine = Array(paybackDays + 1).fill(totalCost);
         
         new Chart(paybackCtx, {
@@ -326,7 +358,7 @@
                 labels: paybackLabels,
                 datasets: [{
                     label: 'Cumulative Revenue (₱)',
-                    data: cumulativeRevenue,
+                    data: cumulativeRevenueConservative,
                     borderColor: energeticPlayfulPalette.accent1,
                     backgroundColor: 'rgba(6, 214, 160, 0.2)',
                     fill: true,
@@ -351,14 +383,14 @@
                     x: {
                          ticks: {
                              autoSkip: true,
-                             maxTicksLimit: 10 // Show fewer labels on x-axis
+                             maxTicksLimit: 10
                          }
                     }
                 },
                 plugins: {
                     ...tooltipConfig.plugins,
                     legend: { display: true, position: 'top' },
-                    title: { display: false } // Title already in section header
+                    title: { display: false }
                 },
                 interaction: {
                     mode: 'index',
@@ -366,6 +398,62 @@
                 }
             }
         });
+
+        // NEW: Peak Payback Chart (8 Uses/Day - 400% Usage)
+        const peakPaybackCtx = document.getElementById('peakPaybackChart').getContext('2d');
+        const peakDays = 20;
+        const dailyRevenuePeak = 8000; // 400% of 2000
+        const peakPaybackLabels = Array.from({length: peakDays + 1}, (_, i) => `Day ${i}`);
+        const cumulativeRevenuePeak = Array.from({length: peakDays + 1}, (_, i) => i * dailyRevenuePeak);
+        const peakCostLine = Array(peakDays + 1).fill(totalCost);
+
+        new Chart(peakPaybackCtx, {
+            type: 'line',
+            data: {
+                labels: peakPaybackLabels,
+                datasets: [{
+                    label: 'Cumulative Revenue (₱)',
+                    data: cumulativeRevenuePeak,
+                    borderColor: energeticPlayfulPalette.accent1,
+                    backgroundColor: 'rgba(6, 214, 160, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                 }, {
+                    label: 'Total Manufacturing Cost (₱)',
+                    data: peakCostLine,
+                    borderColor: energeticPlayfulPalette.primary,
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                ...tooltipConfig,
+                maintainAspectRatio: false,
+                 scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Amount (₱)' }
+                    },
+                    x: {
+                         ticks: {
+                             autoSkip: true,
+                             maxTicksLimit: 10
+                         }
+                    }
+                },
+                plugins: {
+                    ...tooltipConfig.plugins,
+                    legend: { display: true, position: 'top' },
+                    title: { display: false }
+                },
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        });
+
 
         // Margin Chart
         const marginCtx = document.getElementById('marginChart').getContext('2d');
