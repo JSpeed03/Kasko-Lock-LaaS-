@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasko Lock: Financial Feasibility & Scaling Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-grey background */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width for readability */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height */
+            max-height: 400px; /* Max height */
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        /* Energetic & Playful Palette */
+        /* Primary: #FF6B6B (Coral Red) */
+        /* Secondary: #FFD166 (Sunshine Yellow) */
+        /* Accent 1: #06D6A0 (Turquoise Green) */
+        /* Accent 2: #118AB2 (Pacific Blue) */
+        /* Neutral: #073B4C (Midnight Blue - Text/Dark BG) */
+        .bg-primary { background-color: #FF6B6B; }
+        .text-primary { color: #FF6B6B; }
+        .bg-secondary { background-color: #FFD166; }
+        .text-secondary { color: #FFD166; }
+        .bg-accent1 { background-color: #06D6A0; }
+        .text-accent1 { color: #06D6A0; }
+        .bg-accent2 { background-color: #118AB2; }
+        .text-accent2 { color: #118AB2; }
+        .text-neutral { color: #073B4C; }
+        .bg-neutral-dark { background-color: #073B4C; }
+        .highlight-stat {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+        .card {
+             background-color: white;
+             border-radius: 0.5rem; /* rounded-lg */
+             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md */
+             padding: 1.5rem; /* p-6 */
+             margin-bottom: 1.5rem; /* mb-6 */
+             overflow: hidden; /* Prevent content overflow */
+        }
+    </style>
+    <!-- 
+      Source Material Analysis & Narrative Plan:
+      The presentation outlines Kasko Lock, a smart locker system using a Master-Slave architecture. 
+      The narrative will flow from the problem/solution, through the cost-saving innovation, 
+      manufacturing costs, revenue projections, ROI, profit margins, and long-term operational costs, 
+      culminating in the investment case.
+
+      Visualization Choices (No SVG/Mermaid):
+      - Intro Stat (Price): Inform -> Big Number (💰 Unicode) -> Justification: Simple, direct.
+      - Master/Slave Arch: Organize -> Diagram (HTML/CSS/Tailwind) -> Justification: Visualizes structure without SVG.
+      - Cost Per Locker Reduction: Compare -> Bar Chart (Chart.js) -> Justification: Clear comparison of prototype vs mass.
+      - Payback Period: Inform/Change -> Big Number + Line Chart (Chart.js) -> Justification: Shows ROI speed visually.
+      - Profit Margin: Compare -> Donut Chart (Chart.js) -> Justification: Shows cost vs profit composition.
+      - OPEX Breakdown: Compare -> Stacked Bar Chart (Chart.js) -> Justification: Shows Preventive vs Corrective costs.
+      - Final ROI/OPEX vs Revenue: Inform -> Big Numbers -> Justification: Strong concluding stats.
+      - Mermaid JS and SVG were explicitly avoided.
+      - Color Palette Chosen: Energetic & Playful (#FF6B6B, #FFD166, #06D6A0, #118AB2, #073B4C)
+    -->
+</head>
+<body class="text-neutral leading-relaxed">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-neutral mb-4">The Kasko Lock Advantage</h1>
+            <p class="text-xl md:text-2xl text-accent2">Secure, Scalable, and Profitable Automated Locker System</p>
+        </header>
+
+        <section id="intro" class="mb-12 card text-center">
+            <h2 class="text-2xl font-semibold mb-4 text-neutral">Solving Secure Storage Needs</h2>
+            <p class="mb-6 text-lg">In high-traffic areas like universities, malls, and transit hubs, secure storage for personal items like helmets is essential. Traditional lockers are often inconvenient or insecure. Kasko Lock offers an automated, keyless solution using biometric and RFID access.</p>
+            <div class="bg-secondary text-neutral rounded-lg p-6 inline-block">
+                <span class="text-5xl mr-2">💰</span>
+                <span class="highlight-stat text-neutral">₱20</span>
+                <p class="text-lg font-semibold">Per Use Rental Price</p>
+            </div>
+            <p class="mt-4 text-lg">Our model is simple: Locker-as-a-Service (LaaS) with a fixed rate.</p>
+        </section>
+
+        <section id="innovation" class="mb-12 card">
+            <h2 class="text-2xl font-semibold mb-6 text-neutral text-center">Efficiency Through Centralization: Master-Slave Architecture</h2>
+            <p class="mb-8 text-lg text-center">Traditional smart lockers are costly because each unit needs expensive control components. Kasko Lock revolutionizes this with a Master-Slave design, dramatically reducing costs for large deployments.</p>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-8">
+                <div class="border-4 border-accent2 rounded-lg p-6 text-center w-full md:w-1/3 bg-blue-50">
+                    <h3 class="text-xl font-bold mb-2 text-accent2">Master Unit (1x)</h3>
+                    <p class="text-sm">🧠 Central Brain</p>
+                    <ul class="list-disc list-inside text-left mt-2 text-sm text-neutral">
+                        <li>Handles UI (Screen, Buttons)</li>
+                        <li>Processes Payments (Coin Slot)</li>
+                        <li>Manages Authentication (FP/RFID)</li>
+                        <li>Controls System Logic</li>
+                        <li>Communicates with Slaves (ESP-NOW)</li>
+                    </ul>
+                </div>
+                <div class="text-3xl font-bold text-neutral hidden md:block">&rarr;</div>
+                 <div class="text-3xl font-bold text-neutral md:hidden">&darr;</div>
+                <div class="border-4 border-accent1 rounded-lg p-6 text-center w-full md:w-1/2 bg-green-50">
+                    <h3 class="text-xl font-bold mb-2 text-accent1">Slave Units (49x per Master)</h3>
+                     <p class="text-sm">🔧 Actuators</p>
+                    <ul class="list-disc list-inside text-left mt-2 text-sm text-neutral">
+                        <li>Controls Solenoid Lock</li>
+                        <li>Reads Door Sensor</li>
+                        <li>(Optionally controls LEDs)</li>
+                        <li>Receives commands via ESP-NOW</li>
+                        <li>Minimal Components = Low Cost</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="mt-6 text-center text-lg font-semibold text-primary">This architecture drastically lowers the cost per locker in large installations.</p>
+        </section>
+
+        <section id="cost" class="mb-12 card">
+            <h2 class="text-2xl font-semibold mb-6 text-neutral text-center">Manufacturing Cost Advantage</h2>
+            <p class="mb-8 text-lg text-center">Our Master-Slave design leads to significant savings when scaling from prototype to mass production. We've established a low manufacturing floor price, ensuring competitiveness.</p>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                 <div>
+                    <div class="chart-container h-[250px] md:h-[350px]">
+                        <canvas id="costPerLockerChart"></canvas>
+                    </div>
+                 </div>
+                 <div class="text-center">
+                     <p class="text-lg mb-2">Cost Per Locker (CPL)</p>
+                     <p class="highlight-stat text-accent1">25.9%</p>
+                     <p class="text-xl font-semibold text-neutral">Reduction from Prototype to Mass Production (50 Units)</p>
+                     <p class="mt-4 text-base text-gray-600">(Prototype: ~₱2,258 vs. Mass Production: ~₱1,673)</p>
+                     <p class="mt-2 text-sm text-neutral">Based on ₱78,000 Total Mfg. Cost for a 50-locker cluster.</p>
+                 </div>
+            </div>
+        </section>
+
+        <section id="revenue" class="mb-12 card">
+            <h2 class="text-2xl font-semibold mb-6 text-neutral text-center">Rapid Payback Scenario</h2>
+            <p class="mb-8 text-lg text-center">Using a conservative estimate of just two uses per locker per day in a high-traffic area, the system demonstrates exceptional profitability.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div class="bg-accent1 text-white p-6 rounded-lg">
+                    <p class="text-lg mb-1">Daily Revenue</p>
+                    <p class="highlight-stat">₱2,000</p>
+                    <p class="text-sm">(50 Lockers x 2 Uses x ₱20)</p>
+                </div>
+                 <div class="bg-accent2 text-white p-6 rounded-lg">
+                    <p class="text-lg mb-1">Total Mfg. Cost</p>
+                    <p class="highlight-stat">₱78,000</p>
+                    <p class="text-sm">(50-Locker Cluster)</p>
+                </div>
+                <div class="bg-primary text-white p-6 rounded-lg">
+                    <p class="text-lg mb-1">Payback Period</p>
+                    <p class="highlight-stat">39</p>
+                    <p class="text-sm">Days to Recoup Investment</p>
+                </div>
+            </div>
+             <div class="mt-8">
+                 <p class="text-lg text-center font-semibold mb-4 text-neutral">Investment vs. Cumulative Revenue (First 60 Days)</p>
+                 <div class="chart-container h-[300px] md:h-[400px]">
+                     <canvas id="paybackChart"></canvas>
+                 </div>
+             </div>
+        </section>
+
+        <section id="profit" class="mb-12 card">
+            <h2 class="text-2xl font-semibold mb-6 text-neutral text-center">High Margins & Guaranteed Buyer ROI</h2>
+            <p class="mb-8 text-lg text-center">We can establish a strong sales price while ensuring the investment remains highly attractive for the buyer (operator).</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="chart-container h-[250px] md:h-[300px]">
+                    <canvas id="marginChart"></canvas>
+                </div>
+                <div class="text-center space-y-4">
+                    <div class="bg-secondary text-neutral p-4 rounded-lg">
+                        <p class="text-lg">Final Sales Price</p>
+                        <p class="highlight-stat text-neutral">₱117,000</p>
+                        <p class="text-sm">(Targeting 50% Profit Margin)</p>
+                    </div>
+                    <div class="bg-primary text-white p-4 rounded-lg">
+                        <p class="text-lg">Investor Payback</p>
+                        <p class="highlight-stat">58.5 Days</p>
+                        <p class="text-sm">(Based on ₱2k Daily Revenue)</p>
+                    </div>
+                     <p class="text-lg font-semibold text-neutral">Win-Win: Benefits both Kasko Lock (manufacturer) and the operator.</p>
+                </div>
+            </div>
+        </section>
+
+         <section id="maintenance" class="mb-12 card">
+            <h2 class="text-2xl font-semibold mb-6 text-neutral text-center">Sustained Profitability: Low Operational Costs</h2>
+            <p class="mb-8 text-lg text-center">Low maintenance requirements ensure high margins are sustainable over the system's 5-year expected lifespan.</p>
+             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center items-start">
+                 <div class="md:col-span-2">
+                     <p class="text-lg font-semibold mb-2 text-neutral">5-Year Operational Cost Breakdown (Per 50-Locker Cluster)</p>
+                     <div class="chart-container h-[300px] md:h-[350px]">
+                         <canvas id="opexChart"></canvas>
+                     </div>
+                 </div>
+                 <div class="space-y-4 mt-6 md:mt-0">
+                     <div class="bg-accent1 text-white p-4 rounded-lg">
+                        <p class="text-lg mb-1">Total 5-Year OPEX</p>
+                        <p class="highlight-stat">₱32,750</p>
+                        <p class="text-sm">(Preventive + Corrective)</p>
+                    </div>
+                    <div class="bg-accent2 text-white p-4 rounded-lg">
+                        <p class="text-lg mb-1">Est. 5-Year Revenue</p>
+                        <p class="highlight-stat">~₱3.65M</p>
+                        <p class="text-sm">(Based on ₱2k/day)</p>
+                    </div>
+                    <p class="text-lg font-semibold text-neutral mt-4">Operational costs are negligible compared to potential revenue.</p>
+                 </div>
+             </div>
+        </section>
+
+        <section id="conclusion" class="card bg-neutral-dark text-white text-center">
+            <h2 class="text-3xl font-bold mb-6">The Kasko Lock Investment Case</h2>
+            <ul class="list-none space-y-4 text-lg md:text-xl mb-8 inline-block text-left">
+                <li class="flex items-start"><span class="text-accent1 mr-3 text-2xl font-bold">✓</span><span>**Fixed Cost Efficiency:** Master-Slave architecture minimizes scaling costs.</span></li>
+                <li class="flex items-start"><span class="text-accent1 mr-3 text-2xl font-bold">✓</span><span>**Ultra-Rapid ROI:** Payback achieved in 39-59 days.</span></li>
+                <li class="flex items-start"><span class="text-accent1 mr-3 text-2xl font-bold">✓</span><span>**Sustainable Profit:** Low 5-year maintenance costs ensure high margins.</span></li>
+            </ul>
+            <p class="text-2xl font-semibold text-secondary">Call to Action: Fund the first production run of 10 clusters to capture market share immediately.</p>
+        </section>
+
+    </div>
+
+    <script>
+        const tooltipConfig = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+        const wrapLabel = (label) => {
+            const maxLen = 16;
+            if (typeof label !== 'string' || label.length <= maxLen) return label;
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length <= maxLen) {
+                    currentLine += (currentLine ? ' ' : '') + word;
+                } else {
+                    if (currentLine) lines.push(currentLine);
+                    currentLine = word;
+                }
+            });
+            if (currentLine) lines.push(currentLine);
+            return lines;
+        };
+        
+        const energeticPlayfulPalette = {
+            primary: '#FF6B6B', // Coral Red
+            secondary: '#FFD166', // Sunshine Yellow
+            accent1: '#06D6A0', // Turquoise Green
+            accent2: '#118AB2', // Pacific Blue
+            neutral: '#073B4C' // Midnight Blue
+        };
+
+        // Cost Per Locker Chart
+        const cplCtx = document.getElementById('costPerLockerChart').getContext('2d');
+        new Chart(cplCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Prototype (2 Units)', 'Mass Production (50 Units)'].map(wrapLabel),
+                datasets: [{
+                    label: 'Cost Per Locker (₱)',
+                    data: [2258, 1673],
+                    backgroundColor: [energeticPlayfulPalette.primary, energeticPlayfulPalette.accent1],
+                    borderColor: [energeticPlayfulPalette.primary, energeticPlayfulPalette.accent1],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                ...tooltipConfig,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Cost (₱)' }
+                    }
+                },
+                plugins: {
+                     ...tooltipConfig.plugins,
+                    legend: { display: false },
+                    title: { display: true, text: 'Cost Per Locker: Prototype vs. Mass Production' }
+                }
+            }
+        });
+
+        // Payback Chart
+        const paybackCtx = document.getElementById('paybackChart').getContext('2d');
+        const paybackDays = 60;
+        const totalCost = 78000;
+        const dailyRevenue = 2000;
+        const paybackLabels = Array.from({length: paybackDays + 1}, (_, i) => `Day ${i}`);
+        const cumulativeRevenue = Array.from({length: paybackDays + 1}, (_, i) => i * dailyRevenue);
+        const costLine = Array(paybackDays + 1).fill(totalCost);
+        
+        new Chart(paybackCtx, {
+            type: 'line',
+            data: {
+                labels: paybackLabels,
+                datasets: [{
+                    label: 'Cumulative Revenue (₱)',
+                    data: cumulativeRevenue,
+                    borderColor: energeticPlayfulPalette.accent1,
+                    backgroundColor: 'rgba(6, 214, 160, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                 }, {
+                    label: 'Total Manufacturing Cost (₱)',
+                    data: costLine,
+                    borderColor: energeticPlayfulPalette.primary,
+                    borderDash: [5, 5],
+                    fill: false,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                ...tooltipConfig,
+                maintainAspectRatio: false,
+                 scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Amount (₱)' }
+                    },
+                    x: {
+                         ticks: {
+                             autoSkip: true,
+                             maxTicksLimit: 10 // Show fewer labels on x-axis
+                         }
+                    }
+                },
+                plugins: {
+                    ...tooltipConfig.plugins,
+                    legend: { display: true, position: 'top' },
+                    title: { display: false } // Title already in section header
+                },
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        });
+
+        // Margin Chart
+        const marginCtx = document.getElementById('marginChart').getContext('2d');
+        new Chart(marginCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Manufacturing Cost', 'Profit Margin'].map(wrapLabel),
+                datasets: [{
+                    data: [78000, 39000], // Mfg Cost, Profit Margin
+                    backgroundColor: [energeticPlayfulPalette.accent2, energeticPlayfulPalette.secondary],
+                    hoverOffset: 4
+                }]
+            },
+             options: {
+                ...tooltipConfig,
+                 maintainAspectRatio: false,
+                 plugins: {
+                    ...tooltipConfig.plugins,
+                    legend: { display: true, position: 'bottom'},
+                    title: { display: true, text: 'Sales Price Composition (50% Margin)'}
+                 }
+            }
+        });
+        
+        // OPEX Chart
+        const opexCtx = document.getElementById('opexChart').getContext('2d');
+        new Chart(opexCtx, {
+            type: 'bar', // Using stacked bar to show composition
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'].map(wrapLabel),
+                datasets: [{
+                    label: 'Preventive OPEX (₱)',
+                    data: [5000, 5000, 5000, 5000, 5000],
+                    backgroundColor: energeticPlayfulPalette.accent2,
+                }, {
+                    label: 'Corrective OPEX (₱)',
+                    data: [1550, 1550, 1550, 1550, 1550],
+                    backgroundColor: energeticPlayfulPalette.primary,
+                }]
+            },
+            options: {
+                 ...tooltipConfig,
+                 maintainAspectRatio: false,
+                 scales: {
+                    x: { stacked: true },
+                    y: { 
+                        stacked: true,
+                        beginAtZero: true,
+                        title: { display: true, text: 'Annual Cost (₱)'}
+                    }
+                 },
+                 plugins: {
+                    ...tooltipConfig.plugins,
+                     legend: { display: true, position: 'top' },
+                     title: { display: true, text: 'Estimated Annual Operational Costs (OPEX)'}
+                 }
+            }
+        });
+
+    </script>
+</body>
+</html>
