@@ -56,25 +56,6 @@
              overflow: hidden; /* Prevent content overflow */
         }
     </style>
-    <!-- 
-      Source Material Analysis & Narrative Plan:
-      The presentation outlines Kasko Lock, a smart locker system using a Master-Slave architecture. 
-      The narrative will flow from the problem/solution, through the cost-saving innovation, 
-      manufacturing costs, revenue projections, ROI, profit margins, and long-term operational costs, 
-      culminating in the investment case.
-
-      Visualization Choices (No SVG/Mermaid):
-      - Intro Stat (Price): Inform -> Big Number (💰 Unicode) -> Justification: Simple, direct.
-      - Master/Slave Arch: Organize -> Diagram (HTML/CSS/Tailwind) -> Justification: Visualizes structure without SVG.
-      - Cost Per Locker Reduction: Compare -> Bar Chart (Chart.js) -> Justification: Clear comparison of prototype vs mass.
-      - Payback Period: Inform/Change -> Big Number + Line Chart (Chart.js) -> Justification: Shows ROI speed visually.
-      - **NEW: Peak Payback (400% Usage):** Inform/Change -> Big Number + Line Chart (Chart.js) -> Justification: Shows extreme ROI speed.
-      - Profit Margin: Compare -> Donut Chart (Chart.js) -> Justification: Shows cost vs profit composition.
-      - OPEX Breakdown: Compare -> Stacked Bar Chart (Chart.js) -> Justification: Shows Preventive vs Corrective costs.
-      - Final ROI/OPEX vs Revenue: Inform -> Big Numbers -> Justification: Strong concluding stats.
-      - Mermaid JS and SVG were explicitly avoided.
-      - Color Palette Chosen: Energetic & Playful (#FF6B6B, #FFD166, #06D6A0, #118AB2, #073B4C)
-    -->
 </head>
 <body class="text-neutral leading-relaxed">
 
@@ -91,9 +72,9 @@
             <div class="bg-secondary text-neutral rounded-lg p-6 inline-block">
                 <span class="text-5xl mr-2">💰</span>
                 <span class="highlight-stat text-neutral">₱20</span>
-                <p class="text-lg font-semibold">Per Use Rental Price</p>
+                <p class="text-lg font-semibold">Current Per Use Rental Price</p>
             </div>
-            <p class="mt-4 text-lg">Our model is simple: Locker-as-a-Service (LaaS) with a fixed rate.</p>
+            <p class="mt-4 text-lg font-semibold text-primary">Our Locker-as-a-Service (LaaS) model is fully dynamic: the operator can adjust pricing at will via the administrative interface to match local demand and maximize revenue.</p>
         </section>
 
         <section id="innovation" class="mb-12 card">
@@ -175,7 +156,7 @@
              </div>
         </section>
 
-        <!-- NEW PEAK PERFORMANCE SECTION -->
+        <!-- PEAK PERFORMANCE SECTION -->
         <section id="peak-revenue" class="mb-12 card border-4 border-secondary">
             <h2 class="text-2xl font-semibold mb-6 text-neutral text-center">Scenario 2: Peak Performance Payback (8 Uses/Day - 400% Usage)</h2>
             <p class="mb-8 text-lg text-center font-bold text-primary">In high-density locations, the system can achieve 400% of the conservative usage rate, driving exponential ROI. This scenario represents 8 uses per locker per day.</p>
@@ -203,27 +184,27 @@
                  </div>
              </div>
         </section>
-        <!-- END NEW SECTION -->
+        <!-- END PEAK SECTION -->
 
         <section id="profit" class="mb-12 card">
-            <h2 class="text-2xl font-semibold mb-6 text-neutral text-center">High Margins & Guaranteed Buyer ROI</h2>
-            <p class="mb-8 text-lg text-center">We can establish a strong sales price while ensuring the investment remains highly attractive for the buyer (operator).</p>
+            <h2 class="text-2xl font-semibold mb-6 text-neutral text-center">Target Gross Profit & Sales Structure</h2>
+            <p class="mb-8 text-lg text-center">We establish a strong sales price by aiming for a **50% markup** over manufacturing cost, ensuring high margins for us while still guaranteeing rapid ROI for the operator.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div class="chart-container h-[250px] md:h-[300px]">
                     <canvas id="marginChart"></canvas>
                 </div>
                 <div class="text-center space-y-4">
                     <div class="bg-secondary text-neutral p-4 rounded-lg">
-                        <p class="text-lg">Final Sales Price</p>
+                        <p class="text-lg">Final Sales Price (Manufacturer's Revenue)</p>
                         <p class="highlight-stat text-neutral">₱117,000</p>
-                        <p class="text-sm">(Targeting 50% Profit Margin)</p>
+                        <p class="text-sm">(₱78k Cost + ₱39k Target Gross Profit)</p>
                     </div>
                     <div class="bg-primary text-white p-4 rounded-lg">
-                        <p class="text-lg">Investor Payback</p>
+                        <p class="text-lg">Operator Payback (Based on Conservative Revenue)</p>
                         <p class="highlight-stat">58.5 Days</p>
                         <p class="text-sm">(Based on ₱2k Daily Revenue)</p>
                     </div>
-                     <p class="text-lg font-semibold text-neutral">Win-Win: Benefits both Kasko Lock (manufacturer) and the operator.</p>
+                     <p class="text-lg font-semibold text-neutral">This model benefits both Kasko Lock (manufacturer) and the operator.</p>
                 </div>
             </div>
         </section>
@@ -245,7 +226,7 @@
                         <p class="text-sm">(Preventive + Corrective)</p>
                     </div>
                     <div class="bg-accent2 text-white p-4 rounded-lg">
-                        <p class="text-lg mb-1">Est. 5-Year Revenue</p>
+                        <p class="text-lg mb-1">Est. 5-Year Revenue (Operator)</p>
                         <p class="highlight-stat">~₱3.65M</p>
                         <p class="text-sm">(Based on ₱2k/day)</p>
                     </div>
@@ -261,7 +242,6 @@
                 <li class="flex items-start"><span class="text-accent1 mr-3 text-2xl font-bold">✓</span></span><span>**Ultra-Rapid ROI:** Payback achieved in 39 days (conservative) or **under 10 days (peak)**.</span></li>
                 <li class="flex items-start"><span class="text-accent1 mr-3 text-2xl font-bold">✓</span></span><span>**Sustainable Profit:** Low 5-year maintenance costs ensure high margins.</span></li>
             </ul>
-           <!-- <p class="text-2xl font-semibold text-secondary">Call to Action: Fund the first production run of 10 clusters to capture market share immediately.</p> -->
         </section>
 
     </div>
@@ -399,7 +379,7 @@
             }
         });
 
-        // NEW: Peak Payback Chart (8 Uses/Day - 400% Usage)
+        // Peak Payback Chart (8 Uses/Day - 400% Usage)
         const peakPaybackCtx = document.getElementById('peakPaybackChart').getContext('2d');
         const peakDays = 20;
         const dailyRevenuePeak = 8000; // 400% of 2000
@@ -460,7 +440,7 @@
         new Chart(marginCtx, {
             type: 'doughnut',
             data: {
-                labels: ['Manufacturing Cost', 'Profit Margin'].map(wrapLabel),
+                labels: ['Manufacturing Cost', 'Target Gross Profit (50% Markup)'].map(wrapLabel),
                 datasets: [{
                     data: [78000, 39000], // Mfg Cost, Profit Margin
                     backgroundColor: [energeticPlayfulPalette.accent2, energeticPlayfulPalette.secondary],
@@ -473,7 +453,7 @@
                  plugins: {
                     ...tooltipConfig.plugins,
                     legend: { display: true, position: 'bottom'},
-                    title: { display: true, text: 'Sales Price Composition (50% Margin)'}
+                    title: { display: true, text: 'Sales Price Composition (₱117,000)'}
                  }
             }
         });
