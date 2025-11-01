@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-M">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasko Lock: Financial Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .chart-container-large {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 450px;
+        }
+        .arch-box {
+            border: 2px solid;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .arch-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #0077FF;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <div class="max-w-7xl mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-5xl md:text-6xl font-black text-blue-900 mb-4">Kasko Lock</h1>
+            <p class="text-xl md:text-2xl text-blue-700 font-semibold">The Financial Case for a Scalable Locker-as-a-Service (LaaS) Model</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+            <section id="intro" class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">Executive Summary</h2>
+                <p class="text-lg text-slate-700">
+                    The Kasko Lock system is an innovative, secure storage solution designed for high-traffic areas. Our model is simple: **Locker-as-a-Service (LaaS)** with a flexible, admin-controlled rental rate, currently set at **₱20.00 per use**. The system's core advantage lies in its **Master-Slave Architecture**, which centralizes high-cost components to dramatically reduce manufacturing costs, enabling a rapid, industry-leading Return on Investment (ROI) for operators.
+                </p>
+            </section>
+
+            <section id="architecture" class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4 text-center">The Kasko Lock Cost Advantage</h2>
+                <p class="text-lg text-slate-700 text-center mb-6">Our architecture is the key to our low cost. We centralize all expensive components into one Master Unit, which then controls many low-cost Slave Units. This results in a **25.9% reduction** in Cost Per Locker (CPL) when scaling from prototype to production.</p>
+                
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <div class="w-full md:w-2/5">
+                        <div class="arch-box border-blue-900 bg-blue-50">
+                            <h3 class="text-xl font-bold text-blue-900">1. Master Unit (1x)</h3>
+                            <p class="font-semibold">(The Brain)</p>
+                            <ul class="text-sm text-slate-700 list-none mt-2">
+                                <li>ESP32 (Primary Core)</li>
+                                <li>Fingerprint Sensor</li>
+                                <li>RFID Reader</li>
+                                <li>Coin Acceptor</li>
+                                <li>LCD Screen & Numpad</li>
+                                <li>Wi-Fi/OTA Capability</li>
+                            </ul>
+                            <p class="text-blue-900 font-bold mt-2">High Cost, Fixed (Shared)</p>
+                        </div>
+                    </div>
+
+                    <div class="w-full md:w-1/5 arch-arrow">
+                        <div class="text-center">
+                            <span class="text-5xl font-black text-blue-600">→</span>
+                            <p class="text-sm font-semibold text-blue-600">ESP-NOW</p>
+                            <p class="text-xs text-slate-600">(Zero Wiring Cost)</p>
+                        </div>
+                    </div>
+
+                    <div class="w-full md:w-2/5">
+                        <div class="arch-box border-blue-500 bg-slate-50">
+                            <h3 class="text-xl font-bold text-blue-700">2. Slave Units (50x)</h3>
+                            <p class="font-semibold">(The Muscle)</p>
+                            <ul class="text-sm text-slate-700 list-none mt-2">
+                                <li>ESP32 (Minimal)</li>
+                                <li>Solenoid Lock</li>
+                                <li>Magnetic Door Sensor</li>
+                                <li>Status LED</li>
+                            </ul>
+                            <p class="text-blue-700 font-bold mt-2">Low Cost, Variable (Distributed)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="cpl" class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">Cost Per Locker (CPL)</h2>
+                <p class="text-lg text-slate-700 mb-4">
+                    By scaling to a 50-locker cluster, our architecture reduces the average cost per locker by **25.9%** from the prototype phase, achieving a highly competitive production CPL of **₱1,560**.
+                </p>
+                <div class="chart-container">
+                    <canvas id="cplChart"></canvas>
+                </div>
+            </section>
+
+            <section id="breakdown" class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">50-Locker Cluster Cost</h2>
+                <p class="text-lg text-slate-700 mb-4">
+                    The total manufacturing cost for a 50-unit cluster is only **₱78,000**. The low-cost Slave units make up over 96% of the deployment, proving the model's efficiency.
+                </p>
+                <div class="chart-container">
+                    <canvas id="costBreakdownChart"></canvas>
+                </div>
+            </section>
+
+            <section id="roi-conservative" class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">Scenario 1: Conservative Payback (2 Uses/Day)</h2>
+                <p class="text-lg text-slate-700 mb-4">
+                    Even with a highly conservative estimate of just **2 uses per locker per day**, the daily revenue of **₱2,000** completely covers the **₱78,000** initial investment in only **39 days**.
+                </p>
+                <div class="chart-container-large">
+                    <canvas id="roiChartConservative"></canvas>
+                </div>
+            </section>
+            
+            <section id="roi-peak" class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">Scenario 2: Peak Performance Payback (8 Uses/Day)</h2>
+                <p class="text-lg text-slate-700 mb-4">
+                    In a high-traffic location, a realistic peak rate of **8 uses per day** generates **₱8,000** in daily revenue. This results in an extraordinary full payback period of just **9.75 days**.
+                </p>
+                <div class="chart-container-large">
+                    <canvas id="roiChartPeak"></canvas>
+                </div>
+            </section>
+
+            <section id="opex" class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">5-Year Revenue vs. OPEX</h2>
+                <p class="text-lg text-slate-700 mb-4">
+                    The system is designed for long-term reliability. The estimated 5-Year Operational Cost (OPEX) is a tiny fraction of the conservative revenue, ensuring high sustainable profit.
+                </p>
+                <div class="chart-container">
+                    <canvas id="opexChart"></canvas>
+                </div>
+            </section>
+
+            <section id="sales" class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-blue-900 mb-4">Target Gross Profit & Sales Structure</h2>
+                <p class="text-lg text-slate-700 mb-4">
+                    We apply a **50% gross markup** to the **₱78,000** manufacturing cost, resulting in a final B2B sales price of **₱117,000**. The operator still achieves an ROI in under 59 days.
+                </p>
+                <div class="chart-container">
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </section>
+            
+            <section id="conclusion" class="lg:col-span-2 bg-blue-900 text-white rounded-lg shadow-xl p-8">
+                <h2 class="text-3xl font-bold mb-4">An Unbeatable Investment</h2>
+                <p class="text-lg text-blue-100 mb-6">The Kasko Lock system is not just a product, but a highly profitable and scalable business platform. It is defined by three key advantages:</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <h3 class="text-4xl font-black text-blue-300">25.9%</h3>
+                        <p class="font-semibold">Cost Reduction in CPL from prototype to production.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl font-black text-blue-300">39 Days</h3>
+                        <p class="font-semibold">Rapid ROI on the conservative 2-use-per-day model.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl font-black text-blue-300">₱3.6M+</h3>
+                        <p class="font-semibold">Projected 5-Year conservative revenue vs. minimal OPEX.</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        const primaryColor = '#004AAD';
+        const accentColor = '#0077FF';
+        const lightBlue = '#B0DFFF';
+        const textColor = '#333333';
+        const grayColor = '#e2e8f0';
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        const wrapLabels = (label) => {
+            if (label.length > 16) {
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + word).length > 16) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                    }
+                    currentLine += word + ' ';
+                });
+                lines.push(currentLine.trim());
+                return lines;
+            }
+            return label;
+        };
+
+        const cplData = {
+            labels: ['Prototype CPL', 'Mass Deployment CPL (50 Units)'].map(wrapLabels),
+            datasets: [{
+                label: 'Cost Per Locker (₱)',
+                data: [2258, 1560],
+                backgroundColor: [lightBlue, primaryColor],
+                borderColor: [accentColor, primaryColor],
+                borderWidth: 1
+            }]
+        };
+        new Chart(document.getElementById('cplChart'), {
+            type: 'bar',
+            data: cplData,
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: (value) => `₱${value}`
+                        }
+                    }
+                }
+            }
+        });
+
+        const costBreakdownData = {
+            labels: ['Fixed Master Unit (₱3,000)', 'Variable Lockers (₱75,000)'],
+            datasets: [{
+                label: 'Cost Breakdown',
+                data: [3000, 75000],
+                backgroundColor: [accentColor, primaryColor],
+                hoverOffset: 4
+            }]
+        };
+        new Chart(document.getElementById('costBreakdownChart'), {
+            type: 'doughnut',
+            data: costBreakdownData,
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                }
+            }
+        });
+
+        const conservativeDays = 45;
+        const conservativeLabels = Array.from({length: conservativeDays + 1}, (_, i) => `Day ${i}`);
+        const conservativeRevenue = Array.from({length: conservativeDays + 1}, (_, i) => i * 2000);
+        const conservativeCost = Array(conservativeDays + 1).fill(78000);
+        const roiChartConservativeData = {
+            labels: conservativeLabels,
+            datasets: [
+                {
+                    label: 'Cumulative Revenue (₱)',
+                    data: conservativeRevenue,
+                    borderColor: accentColor,
+                    backgroundColor: 'rgba(0, 119, 255, 0.1)',
+                    fill: true,
+                    tension: 0.1
+                },
+                {
+                    label: 'Investment Cost (₱)',
+                    data: conservativeCost,
+                    borderColor: '#EF4444',
+                    borderDash: [5, 5],
+                    fill: false
+                }
+            ]
+        };
+        new Chart(document.getElementById('roiChartConservative'), {
+            type: 'line',
+            data: roiChartConservativeData,
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: (value) => `₱${value / 1000}k`
+                        }
+                    }
+                }
+            }
+        });
+        
+        const peakDays = 15;
+        const peakLabels = Array.from({length: peakDays + 1}, (_, i) => `Day ${i}`);
+        const peakRevenue = Array.from({length: peakDays + 1}, (_, i) => i * 8000);
+        const peakCost = Array(peakDays + 1).fill(78000);
+        const roiChartPeakData = {
+            labels: peakLabels,
+            datasets: [
+                {
+                    label: 'Cumulative Revenue (₱)',
+                    data: peakRevenue,
+                    borderColor: accentColor,
+                    backgroundColor: 'rgba(0, 119, 255, 0.1)',
+                    fill: true,
+                    tension: 0.1
+                },
+                {
+                    label: 'Investment Cost (₱)',
+                    data: peakCost,
+                    borderColor: '#EF4444',
+                    borderDash: [5, 5],
+                    fill: false
+                }
+            ]
+        };
+        new Chart(document.getElementById('roiChartPeak'), {
+            type: 'line',
+            data: roiChartPeakData,
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            callback: (value) => `₱${value / 1000}k`
+                        }
+                    }
+                }
+            }
+        });
+
+        const opexData = {
+            labels: ['5-Year Conservative Revenue', '5-Year OPEX'].map(wrapLabels),
+            datasets: [{
+                label: 'Cost (₱)',
+                data: [3650000, 32750],
+                backgroundColor: [primaryColor, lightBlue],
+            }]
+        };
+        new Chart(document.getElementById('opexChart'), {
+            type: 'bar',
+            data: opexData,
+            options: {
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                scales: {
+                    x: {
+                        type: 'logarithmic',
+                        ticks: {
+                            callback: (value) => `₱${value.toLocaleString()}`
+                        }
+                    }
+                }
+            }
+        });
+        
+        const salesData = {
+            labels: ['Manufacturing Cost (₱78,000)', 'Target Gross Profit (₱39,000)'],
+            datasets: [{
+                label: 'Sales Price Composition',
+                data: [78000, 39000],
+                backgroundColor: [primaryColor, accentColor],
+                hoverOffset: 4
+            }]
+        };
+        new Chart(document.getElementById('salesChart'), {
+            type: 'doughnut',
+            data: salesData,
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    tooltip: { 
+                        callbacks: { 
+                            title: tooltipTitleCallback,
+                            label: (context) => ` ${context.label}: ₱${context.raw.toLocaleString()}`
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
