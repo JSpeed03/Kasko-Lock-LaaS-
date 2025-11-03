@@ -69,13 +69,13 @@
 
             <section id="architecture" class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-3xl font-bold text-blue-900 mb-4 text-center">The Kasko Lock Cost Advantage</h2>
-                <p class="text-lg text-slate-700 text-center mb-6">Our architecture is the key to our low cost. We centralize all expensive components into one Master Unit, which then controls many low-cost Slave Units. This results in a **25.9% reduction** in Cost Per Locker (CPL) when scaling from prototype to production. The **ESP-NOW link eliminates complex data/signal wiring** between units, even though essential power and solenoid actuation wires remain.</p>
+                <p class="text-lg text-slate-700 text-center mb-6">Our architecture is the key to our low cost. We centralize all expensive components into one **Master Unit (non-rentable)** which then controls **49 low-cost Slave Units (rentable lockers)**. This results in a **25.9% reduction** in Cost Per Locker (CPL) when scaling from prototype to production. The **ESP-NOW link eliminates complex data/signal wiring** between units, even though essential power and solenoid actuation wires remain.</p>
                 
                 <div class="flex flex-col md:flex-row items-center justify-center gap-6">
                     <div class="w-full md:w-2/5">
                         <div class="arch-box border-blue-900 bg-blue-50">
                             <h3 class="text-xl font-bold text-blue-900">1. Master Unit (1x)</h3>
-                            <p class="font-semibold">(The Brain)</p>
+                            <p class="font-semibold">(The Brain - Interface & Payment)</p>
                             <ul class="text-sm text-slate-700 list-none mt-2">
                                 <li>ESP32 (Primary Core)</li>
                                 <li>Fingerprint Sensor</li>
@@ -98,8 +98,8 @@
 
                     <div class="w-full md:w-2/5">
                         <div class="arch-box border-blue-500 bg-slate-50">
-                            <h3 class="text-xl font-bold text-blue-700">2. Slave Units (50x)</h3>
-                            <p class="font-semibold">(The Muscle)</p>
+                            <h3 class="text-xl font-bold text-blue-700">2. Slave Units (49x Rentable)</h3>
+                            <p class="font-semibold">(The Muscle - Lock Control)</p>
                             <ul class="text-sm text-slate-700 list-none mt-2">
                                 <li>ESP32 (Minimal)</li>
                                 <li>Solenoid Lock</li>
@@ -114,7 +114,7 @@
             <section id="cpl" class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-3xl font-bold text-blue-900 mb-4">Cost Per Locker (CPL)</h2>
                 <p class="text-lg text-slate-700 mb-4">
-                    By scaling to a 50-locker cluster, our architecture reduces the average cost per locker by **25.9%** from the prototype phase, achieving a highly competitive production CPL of **₱1,560**.
+                    By scaling to a 50-unit cluster (1 Master, 49 Slaves), our architecture reduces the average cost per locker by **25.9%** from the prototype phase, achieving a highly competitive production CPL of **₱1,560**.
                 </p>
                 <div class="chart-container">
                     <canvas id="cplChart"></canvas>
@@ -124,7 +124,7 @@
             <section id="breakdown" class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-3xl font-bold text-blue-900 mb-4">50-Locker Cluster Cost</h2>
                 <p class="text-lg text-slate-700 mb-4">
-                    The total manufacturing cost for a 50-unit cluster is only **₱78,000**. The low-cost Slave units make up over 96% of the deployment, proving the model's efficiency.
+                    The total manufacturing cost for the cluster (1 Master, 49 Slaves) is only **₱80,000**. This proves the model's efficiency by centralizing high-cost components.
                 </p>
                 <div class="chart-container">
                     <canvas id="costBreakdownChart"></canvas>
@@ -134,7 +134,7 @@
             <section id="roi-conservative" class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-3xl font-bold text-blue-900 mb-4">Scenario 1: Conservative Payback (2 Uses/Day)</h2>
                 <p class="text-lg text-slate-700 mb-4">
-                    Even with a highly conservative estimate of just **2 uses per locker per day**, the daily revenue of **₱2,000** completely covers the **₱78,000** initial investment in only **39 days**.
+                    Even with a highly conservative estimate of just **2 uses per rentable locker per day**, the daily revenue of **₱1,960** (49 units x ₱40) completely covers the **₱80,000** initial investment in only **41 days**.
                 </p>
                 <div class="chart-container-large">
                     <canvas id="roiChartConservative"></canvas>
@@ -144,7 +144,7 @@
             <section id="roi-peak" class="lg:col-span-2 bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-3xl font-bold text-blue-900 mb-4">Scenario 2: Peak Performance Payback (8 Uses/Day)</h2>
                 <p class="text-lg text-slate-700 mb-4">
-                    In a high-traffic location, a realistic peak rate of **8 uses per day** generates **₱8,000** in daily revenue. This results in an extraordinary full payback period of just **9.75 days**.
+                    In a high-traffic location, a realistic peak rate of **8 uses per day** generates **₱7,840** (49 units x ₱160) in daily revenue. This results in an extraordinary full payback period of just **11 days**.
                 </p>
                 <div class="chart-container-large">
                     <canvas id="roiChartPeak"></canvas>
@@ -154,7 +154,7 @@
             <section id="opex" class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-3xl font-bold text-blue-900 mb-4">5-Year Revenue vs. OPEX</h2>
                 <p class="text-lg text-slate-700 mb-4">
-                    The system is designed for long-term reliability. The estimated 5-Year Operational Cost (OPEX) is a tiny fraction of the conservative revenue, ensuring high sustainable profit.
+                    The system is designed for long-term reliability. The estimated 5-Year Operational Cost (OPEX) is approximately **₱30,000**, a tiny fraction of the conservative revenue of **₱3.577M**, ensuring high sustainable profit.
                 </p>
                 <div class="chart-container">
                     <canvas id="opexChart"></canvas>
@@ -164,7 +164,7 @@
             <section id="sales" class="bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-3xl font-bold text-blue-900 mb-4">Target Gross Profit & Sales Structure</h2>
                 <p class="text-lg text-slate-700 mb-4">
-                    We apply a **50% gross markup** to the **₱78,000** manufacturing cost, resulting in a final B2B sales price of **₱117,000**. The operator still achieves an ROI in under 59 days.
+                    We apply a **50% gross markup** to the **₱80,000** manufacturing cost, resulting in a final B2B sales price of **₱120,000**. The operator still achieves an ROI in under **61 days** (based on 49 units).
                 </p>
                 <div class="chart-container">
                     <canvas id="salesChart"></canvas>
@@ -180,11 +180,11 @@
                         <p class="font-semibold">Cost Reduction in CPL from prototype to production.</p>
                     </div>
                     <div>
-                        <h3 class="text-4xl font-black text-blue-300">39 Days</h3>
-                        <p class="font-semibold">Rapid ROI on the conservative 2-use-per-day model.</p>
+                        <h3 class="text-4xl font-black text-blue-300">41 Days</h3>
+                        <p class="font-semibold">Rapid ROI on the conservative 2-use-per-day model (49 units).</p>
                     </div>
                     <div>
-                        <h3 class="text-4xl font-black text-blue-300">₱3.6M+</h3>
+                        <h3 class="text-4xl font-black text-blue-300">₱3.577M+</h3>
                         <p class="font-semibold">Projected 5-Year conservative revenue vs. minimal OPEX.</p>
                     </div>
                 </div>
@@ -259,10 +259,11 @@
         });
 
         const costBreakdownData = {
-            labels: ['Fixed Master Unit (₱3,000)', 'Variable Lockers (₱75,000)'],
+            // Using cost values to align with the text: ₱80,000 total (Master 10k, Slave 70k)
+            labels: ['Fixed Master Unit (₱10,000)', 'Variable Lockers (₱70,000)'],
             datasets: [{
                 label: 'Cost Breakdown',
-                data: [3000, 75000],
+                data: [10000, 70000],
                 backgroundColor: [accentColor, primaryColor],
                 hoverOffset: 4
             }]
@@ -273,15 +274,22 @@
             options: {
                 maintainAspectRatio: false,
                 plugins: {
-                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                    tooltip: { 
+                         callbacks: { 
+                            title: tooltipTitleCallback,
+                            label: (context) => ` ${context.label}: ₱${context.raw.toLocaleString()}`
+                        }
+                    }
                 }
             }
         });
 
-        const conservativeDays = 45;
-        const conservativeLabels = Array.from({length: conservativeDays + 1}, (_, i) => `Day ${i}`);
-        const conservativeRevenue = Array.from({length: conservativeDays + 1}, (_, i) => i * 2000);
-        const conservativeCost = Array(conservativeDays + 1).fill(78000);
+        // Using the cost of ₱80,000 for the visualization
+        const conservativeCostValue = 80000; 
+        const conservativeDays = 45; // Extend days to show break-even past 40
+        const conservativeLabels = Array.from({length: conservativeDays + 1}, (_, i) => `Day ${i}`); // Define conservativeLabels
+        const conservativeRevenue = Array.from({length: conservativeDays + 1}, (_, i) => i * 1960); // Daily Rev ₱1,960 (49 units * 2 uses * ₱20)
+        const conservativeCost = Array(conservativeDays + 1).fill(conservativeCostValue);
         const roiChartConservativeData = {
             labels: conservativeLabels,
             datasets: [
@@ -294,7 +302,7 @@
                     tension: 0.1
                 },
                 {
-                    label: 'Investment Cost (₱)',
+                    label: 'Investment Cost (₱80,000)',
                     data: conservativeCost,
                     borderColor: '#EF4444',
                     borderDash: [5, 5],
@@ -320,10 +328,12 @@
             }
         });
         
-        const peakDays = 15;
-        const peakLabels = Array.from({length: peakDays + 1}, (_, i) => `Day ${i}`);
-        const peakRevenue = Array.from({length: peakDays + 1}, (_, i) => i * 8000);
-        const peakCost = Array(peakDays + 1).fill(78000);
+        // Using the cost of ₱80,000 for the visualization
+        const peakCostValue = 80000;
+        const peakDays = 15; // Extend days to show break-even past 10
+        const peakLabels = Array.from({length: peakDays + 1}, (_, i) => `Day ${i}`); // Correctly defined
+        const peakRevenue = Array.from({length: peakDays + 1}, (_, i) => i * 7840); // Daily Rev ₱7,840 (49 units * 8 uses * ₱20)
+        const peakCost = Array(peakDays + 1).fill(peakCostValue);
         const roiChartPeakData = {
             labels: peakLabels,
             datasets: [
@@ -336,7 +346,7 @@
                     tension: 0.1
                 },
                 {
-                    label: 'Investment Cost (₱)',
+                    label: 'Investment Cost (₱80,000)',
                     data: peakCost,
                     borderColor: '#EF4444',
                     borderDash: [5, 5],
@@ -362,11 +372,13 @@
             }
         });
 
+        // 5-Year Revenue Calculation: ₱1960 * 365 days * 5 years = ₱3,577,000
         const opexData = {
-            labels: ['5-Year Conservative Revenue', '5-Year OPEX'].map(wrapLabels),
+            // Using OPEX of ₱30,000 and updated revenue
+            labels: ['5-Year Conservative Revenue (₱3.577M)', '5-Year OPEX (₱30k)'].map(wrapLabels),
             datasets: [{
                 label: 'Cost (₱)',
-                data: [3650000, 32750],
+                data: [3577000, 30000],
                 backgroundColor: [primaryColor, lightBlue],
             }]
         };
@@ -392,10 +404,11 @@
         });
         
         const salesData = {
-            labels: ['Manufacturing Cost (₱78,000)', 'Target Gross Profit (₱39,000)'],
+            // Using cost values to align with the text: ₱120,000 total (Cost 80k, Profit 40k)
+            labels: ['Manufacturing Cost (₱80,000)', 'Target Gross Profit (₱40,000)'],
             datasets: [{
                 label: 'Sales Price Composition',
-                data: [78000, 39000],
+                data: [80000, 40000],
                 backgroundColor: [primaryColor, accentColor],
                 hoverOffset: 4
             }]
